@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
+    public Animator animator;
 
     public CharacterController controller;
 
     public InputMaster controls;
 
     public float speed = 6f;
+    public float turnSmoothTime = 0.1f;
+    public float turnSmoothVelocity = 0.1f;
 
     public Vector2 move;
     public Transform cam;
@@ -33,11 +36,6 @@ public class ThirdPersonMovement : MonoBehaviour
         controls.Disable();
     }
 
-    void Move(Vector2 input)
-    {
-        
-    }
-
     void Jump()
     {
         Debug.Log("Jump");
@@ -55,11 +53,18 @@ public class ThirdPersonMovement : MonoBehaviour
         Debug.Log("Moving");
         if (direction.magnitude >= 0.1f)
         {
+            animator.SetBool("isMoving", true);
+
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0);
 
             Vector3 moveDirecetion = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             controller.Move(moveDirecetion.normalized * speed * Time.deltaTime);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
     }
 }
