@@ -28,7 +28,9 @@ public class WorldManager : MonoBehaviour
             NetworkManager.Singleton.StartHost();
             var playerObject = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
             playerObject.GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.Singleton.LocalClientId);
-            
+            GameManager.Instance.Initialize();
+
+
         }
         if (GUILayout.Button("Client"))
         {
@@ -43,12 +45,6 @@ public class WorldManager : MonoBehaviour
                     cinemachineFreeLook.LookAt = networkObjects[i].transform.Find("HeadTransf");
                 }
             }
-                
-            //var playerObject = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(NetworkManager.Singleton.LocalClientId);
-            //playerObject.ChangeOwnership(NetworkManager.Singleton.LocalClientId);
-            //var cinemachineFreeLook = FindObjectOfType<CinemachineFreeLook>();
-            //cinemachineFreeLook.Follow = playerObject.transform;
-            //cinemachineFreeLook.LookAt = playerObject.transform.Find("HeadTransf");
         }
         if (GUILayout.Button("Server")) NetworkManager.Singleton.StartServer();
     }

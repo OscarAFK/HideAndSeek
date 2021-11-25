@@ -5,10 +5,14 @@ using UnityEngine;
 using Unity.Netcode;
 using Cinemachine;
 
-public class ThirdPersonMovement : MonoBehaviour
+public class ThirdPersonMovement : NetworkBehaviour
 {
+    public enum PlayerState{
+        Idle,
+        Walking
+    }
 
-
+    private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
 
     public Animator animator;
 
@@ -70,6 +74,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private void Update()
     {
         MovePlayer();
+        AnimatePlayer();
     }
 
     void MovePlayer()
@@ -82,7 +87,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            if(gameObject.GetComponent<NetworkObject>().IsOwner) animator.SetBool("isMoving", true);
+            if(gameObject.GetComponent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Walking);//animator.SetBool("isMoving", true);
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -92,7 +97,24 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(moveDirecetion.normalized * speed * Time.deltaTime);
         }else
         {
-            if (gameObject.GetComponent<NetworkObject>().IsOwner) animator.SetBool("isMoving", false);
+            if (gameObject.GetComponent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Idle);//animator.SetBool("isMoving", false);
         }
+    }
+
+    void AnimatePlayer()
+    {
+        if(networkPlayerState.Value == PlayerState.Walking)
+        {
+            animator.SetBool("isMoving", true);
+        }else
+        {
+            animator.SetBool("isMoving", false);
+        }
+    }
+
+    [ServerRpc]
+    public void UpdatePlayerStateServerRPC(PlayerState newState)
+    {
+        networkPlayerState.Value = newState;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class SpawnPoint : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class SpawnPoint : MonoBehaviour
         Piece piece = Instantiate(GameManager.Instance.prefabPiece);
         piece.transform.position = pos;
         piece.spawnPoint = this;
+        piece.gameObject.GetComponent<NetworkObject>().Spawn();
         return true;
     }
 

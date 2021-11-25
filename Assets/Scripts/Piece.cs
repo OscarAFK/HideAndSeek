@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class Piece : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class Piece : MonoBehaviour
 
     private void OnTriggerEnter(Collider  other)
     {
-        if (other.gameObject.tag == "proie")
+       if (other.gameObject.tag == "proie" && NetworkManager.Singleton.IsServer)
         {
             GetPiece();
         }
