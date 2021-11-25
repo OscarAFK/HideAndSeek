@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1992936194940487193, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 1992936194940487194, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}
       propertyPath: m_Name
       value: PlayerReseau
@@ -80,6 +84,20 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 1270896593078288936, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}
   m_PrefabInstance: {fileID: 386893160653932789}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &85025133063198263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231201213242412783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab4e7381eeaa5e64299029fd86761264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  netScore:
+    m_InternalValue: 0
 --- !u!114 &2091810149455099234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,9 +116,9 @@ MonoBehaviour:
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01

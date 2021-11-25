@@ -6,10 +6,11 @@ using Unity.Netcode;
 public class GameManager : MonoBehaviour
 {
     static GameManager instance = null;
-
+    
     public Piece prefabPiece;
     public int nbPieceTotal;
     int nbPiece;
+
 
     List<SpawnPoint> spawnPoints;
     List<SpawnPoint> emptySpawnPoints;

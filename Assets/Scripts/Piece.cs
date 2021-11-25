@@ -8,6 +8,8 @@ public class Piece : MonoBehaviour
     [HideInInspector]
     public SpawnPoint spawnPoint;
 
+    public int score = 1;
+
     void GetPiece()
     {
         GameManager.Instance.EmptySpawnPoint(spawnPoint);
@@ -19,6 +21,7 @@ public class Piece : MonoBehaviour
        if (other.gameObject.tag == "proie" && NetworkManager.Singleton.IsServer)
         {
             GetPiece();
+            other.GetComponent<Player>().AddScore(score);
         }
     }
 }

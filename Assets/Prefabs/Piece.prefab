@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 0}
+  score: 1
 --- !u!114 &7166521715278830224
 MonoBehaviour:
   m_ObjectHideFlags: 0
