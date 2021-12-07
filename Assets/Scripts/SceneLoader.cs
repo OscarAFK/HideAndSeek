@@ -10,6 +10,8 @@ public class SceneLoader : MonoBehaviour
 {
     public UNetTransport uNetTransport;
 
+    public NetworkObject localPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class SceneLoader : MonoBehaviour
         {
             Debug.Log("Invalid address, default address and port used");
             uNetTransport.ConnectAddress = "127.0.0.1";
-            uNetTransport.ConnectPort = 8888;
+            uNetTransport.ConnectPort = 7777;
         }
         if (ConnexionInfo.isHosting)
         {
@@ -39,9 +41,7 @@ public class SceneLoader : MonoBehaviour
                 if (networkObjects[i].IsLocalPlayer)
                 {
                     networkObjects[i].GetComponent<PlayerType>().BecomePrey();
-                    var cinemachineFreeLook = FindObjectOfType<CinemachineFreeLook>();
-                    cinemachineFreeLook.Follow = networkObjects[i].transform;
-                    cinemachineFreeLook.LookAt = networkObjects[i].transform.Find("HeadTransf");
+                    localPlayer = networkObjects[i];
                 }
             }
         }

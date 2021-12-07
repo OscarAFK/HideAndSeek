@@ -38,16 +38,6 @@ public class ThirdPersonMovement : NetworkBehaviour
         cam = Camera.main.transform;
     }
 
-    private void Start()
-    {
-        if (GetComponent<NetworkObject>().IsLocalPlayer)
-        {
-            var cinemachineFreeLook = FindObjectOfType<CinemachineFreeLook>();
-            cinemachineFreeLook.Follow = controller.transform;
-            cinemachineFreeLook.LookAt = transform.Find("HeadTransf");
-        }
-    }
-
     private void OnEnable()
     {
         controls.Enable();
@@ -82,7 +72,7 @@ public class ThirdPersonMovement : NetworkBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            if(gameObject.GetComponent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Walking);//animator.SetBool("isMoving", true);
+            if(gameObject.GetComponentInParent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Walking);//animator.SetBool("isMoving", true);
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(controller.transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -92,7 +82,7 @@ public class ThirdPersonMovement : NetworkBehaviour
             controller.Move(moveDirecetion.normalized * speed * Time.deltaTime);
         }else
         {
-            if (gameObject.GetComponent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Idle);//animator.SetBool("isMoving", false);
+            if (gameObject.GetComponentInParent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Idle);//animator.SetBool("isMoving", false);
         }
     }
 
