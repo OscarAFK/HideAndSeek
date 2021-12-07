@@ -29,9 +29,6 @@ public class ThirdPersonMovement : NetworkBehaviour
 
     public Transform cam;
 
-    //variables pour la gestion des animations
-    Vector3 lastPos;
-
     private void Awake()
     {
         controls = new InputMaster();
@@ -39,8 +36,6 @@ public class ThirdPersonMovement : NetworkBehaviour
         controls.Player.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Player.Movement.canceled += ctx => move = Vector2.zero;
         cam = Camera.main.transform;
-        lastPos = transform.position;
-        
     }
 
     private void Start()
@@ -48,7 +43,7 @@ public class ThirdPersonMovement : NetworkBehaviour
         if (GetComponent<NetworkObject>().IsLocalPlayer)
         {
             var cinemachineFreeLook = FindObjectOfType<CinemachineFreeLook>();
-            cinemachineFreeLook.Follow = transform;
+            cinemachineFreeLook.Follow = controller.transform;
             cinemachineFreeLook.LookAt = transform.Find("HeadTransf");
         }
     }
@@ -90,8 +85,8 @@ public class ThirdPersonMovement : NetworkBehaviour
             if(gameObject.GetComponent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Walking);//animator.SetBool("isMoving", true);
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0);
+            float angle = Mathf.SmoothDampAngle(controller.transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            controller.transform.rotation = Quaternion.Euler(0f, angle, 0);
 
             Vector3 moveDirecetion = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             controller.Move(moveDirecetion.normalized * speed * Time.deltaTime);
