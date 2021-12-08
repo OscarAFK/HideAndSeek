@@ -90,7 +90,7 @@ public class SceneLoader : NetworkBehaviour
     Player CreatePrey(ulong id)
     {
         GameObject player = Instantiate(preyPrefab);
-        player.transform.position = new Vector3(0, 0, 0);
+        player.transform.position = new Vector3(36, 0, -22);
         player.gameObject.GetComponent<NetworkObject>().SpawnAsPlayerObject(id);
         return player.GetComponent<Player>();
     }

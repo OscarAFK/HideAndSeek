@@ -55,7 +55,7 @@ public class MenuPrincipal : MonoBehaviour
         if (RecupereConnexionInfo())
         {
             ConnexionInfo.isHosting = true;
-            SceneManager.LoadScene("Reseau1Menu");
+            SceneManager.LoadScene("layout with fourniture");
         }else
         {
             adressInputField.color = Color.red;
@@ -67,7 +67,7 @@ public class MenuPrincipal : MonoBehaviour
         if (RecupereConnexionInfo())
         {
             ConnexionInfo.isHosting = false;
-            SceneManager.LoadScene("Reseau1Menu");
+            SceneManager.LoadScene("layout with fourniture");
         }
         else
         {
