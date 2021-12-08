@@ -7,6 +7,8 @@ TagManager:
   - spawnPiece
   - proie
   - hunter
+  - spawnPrey
+  - spawnHunter
   layers:
   - Default
   - TransparentFX

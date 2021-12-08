@@ -14,6 +14,9 @@ public class SceneLoader : NetworkBehaviour
     public GameObject preyPrefab;
     public GameObject hunterPrefab;
 
+    PreySpawn[] preySpawns;
+    GameObject hunterSpawn;
+
     private NetworkVariable<int> playersInGame = new NetworkVariable<int>();
 
     // Start is called before the first frame update
@@ -22,6 +25,8 @@ public class SceneLoader : NetworkBehaviour
         NetworkManager.Singleton.OnClientConnectedCallback += Singleton_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnClientDisconnectCallback;
 
+        preySpawns = FindObjectsOfType<PreySpawn>();
+        hunterSpawn = GameObject.FindGameObjectWithTag("spawnHunter");
 
         uNetTransport.ConnectAddress = ConnexionInfo.ipAdress;
         uNetTransport.ConnectPort = ConnexionInfo.port;
@@ -90,7 +95,20 @@ public class SceneLoader : NetworkBehaviour
     Player CreatePrey(ulong id)
     {
         GameObject player = Instantiate(preyPrefab);
-        player.transform.position = new Vector3(36, 0, -22);
+        //player.transform.position = new Vector3(36, 0, -22);
+        bool foundGoodSpawn = false;
+        int nbIter = 0;
+        while (!foundGoodSpawn && nbIter< preySpawns.Length)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, preySpawns.Length);
+            if (!preySpawns[randomIndex].playerIsNear)
+            {
+                player.transform.position = preySpawns[randomIndex].transform.position;
+                foundGoodSpawn = true;
+            }
+            nbIter++;
+        }
+        
         player.gameObject.GetComponent<NetworkObject>().SpawnAsPlayerObject(id);
         return player.GetComponent<Player>();
     }
@@ -98,7 +116,7 @@ public class SceneLoader : NetworkBehaviour
     Player CreateHunter(ulong id)
     {
         GameObject player = Instantiate(hunterPrefab);
-        player.transform.position = new Vector3(0, 1, 0);
+        player.transform.position = hunterSpawn.transform.position;
         player.gameObject.GetComponent<NetworkObject>().SpawnAsPlayerObject(id);
         return player.GetComponent<Player>();
     }
