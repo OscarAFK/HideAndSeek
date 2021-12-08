@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerType : NetworkBehaviour
 {
 
+
     public NetworkVariable<bool> networkIsPrey = new NetworkVariable<bool>();
 
     public GameObject prey;
