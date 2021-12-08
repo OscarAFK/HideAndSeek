@@ -42,7 +42,6 @@ public class MenuPrincipal : MonoBehaviour
         if (s.Length != 2) return false;
         ConnexionInfo.ipAdress = s[0];
         string tmp = new string(s[1].Where(p => char.IsDigit(p)).ToArray());    //On ne garde que de nombre pour le port.
-        for (int i = 0; i < tmp.Length; i++) Debug.Log(tmp[i]);
         if (int.TryParse(tmp, out int result))
         {
             ConnexionInfo.port = result;

@@ -29,28 +29,12 @@ public class ThirdPersonMovement : NetworkBehaviour
 
     public Transform cam;
 
-    //variables pour la gestion des animations
-    Vector3 lastPos;
-
     private void Awake()
     {
         controls = new InputMaster();
         controls.Player.Jump.performed += _ => Jump();
         controls.Player.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Player.Movement.canceled += ctx => move = Vector2.zero;
-        cam = Camera.main.transform;
-        lastPos = transform.position;
-        
-    }
-
-    private void Start()
-    {
-        if (GetComponent<NetworkObject>().IsLocalPlayer)
-        {
-            var cinemachineFreeLook = FindObjectOfType<CinemachineFreeLook>();
-            cinemachineFreeLook.Follow = transform;
-            cinemachineFreeLook.LookAt = transform.Find("HeadTransf");
-        }
     }
 
     private void OnEnable()
@@ -73,7 +57,7 @@ public class ThirdPersonMovement : NetworkBehaviour
     
     private void Update()
     {
-        MovePlayer();
+        if (gameObject.GetComponent<NetworkObject>().IsOwner) MovePlayer();
         AnimatePlayer();
     }
 
@@ -87,7 +71,7 @@ public class ThirdPersonMovement : NetworkBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            if(gameObject.GetComponent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Walking);//animator.SetBool("isMoving", true);
+            UpdatePlayerStateServerRPC(PlayerState.Walking);//animator.SetBool("isMoving", true);
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -97,7 +81,7 @@ public class ThirdPersonMovement : NetworkBehaviour
             controller.Move(moveDirecetion.normalized * speed * Time.deltaTime);
         }else
         {
-            if (gameObject.GetComponent<NetworkObject>().IsOwner) UpdatePlayerStateServerRPC(PlayerState.Idle);//animator.SetBool("isMoving", false);
+            UpdatePlayerStateServerRPC(PlayerState.Idle);//animator.SetBool("isMoving", false);
         }
     }
 

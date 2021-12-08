@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour
 {
+    public NetworkVariable<int> netId = new NetworkVariable<int>();
     public NetworkVariable<int> netScore = new NetworkVariable<int>();
 
     public override void OnNetworkSpawn()
