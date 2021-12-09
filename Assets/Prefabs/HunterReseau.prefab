@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 887537258523450796}
   - component: {fileID: 1620392760782279454}
   - component: {fileID: 462638797821325117}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HunterReseau
-  m_TagString: Untagged
+  m_TagString: hunter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,6 +135,7 @@ MonoBehaviour:
     m_InternalValue: 0
   netShouldChangeLocation:
     m_InternalValue: 0
+  animatorCanevas: {fileID: 0}
 --- !u!114 &887537258523450796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +270,7 @@ MonoBehaviour:
   laserMask:
     serializedVersion: 2
     m_Bits: 16439
+  hitGameObject: {fileID: 0}
 --- !u!1 &1799552214408581532
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +282,7 @@ GameObject:
   - component: {fileID: 7308862123213002691}
   - component: {fileID: 6095988031966608495}
   - component: {fileID: 2829531914850753132}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +388,7 @@ GameObject:
   - component: {fileID: 3238647378225917405}
   - component: {fileID: 8792230646614735103}
   - component: {fileID: 4139313775547531268}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -484,7 +486,7 @@ GameObject:
   - component: {fileID: 1292738926715935669}
   - component: {fileID: 868500930979434774}
   - component: {fileID: 5916951445266200248}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

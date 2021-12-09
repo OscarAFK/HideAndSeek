@@ -20,9 +20,7 @@ public class SpawnPoint : MonoBehaviour
     public bool PlayerIsNear()
     {
         int layerPrey = LayerMask.GetMask("Prey");
-        int layerHunter = LayerMask.GetMask("Hunter");
-        int layerMask = layerPrey | layerHunter;
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, layerMask);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, layerPrey);
         if (hitColliders.Length > 0) return true;
         else return false;
     }
