@@ -987,6 +987,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1294162166654652227}
     - target: {fileID: 1992936194940487193, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}
+      propertyPath: m_Height
+      value: 2.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992936194940487193, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}
+      propertyPath: m_Center.y
+      value: 1.275
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992936194940487193, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}
       propertyPath: m_SkinWidth
       value: 0.08
       objectReference: {fileID: 0}
