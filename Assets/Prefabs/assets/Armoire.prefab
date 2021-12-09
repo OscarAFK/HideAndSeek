@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1895672983625993404}
   - component: {fileID: 8457143481681277355}
   - component: {fileID: 4708726618977053991}
+  - component: {fileID: 874198490953415642}
   m_Layer: 0
   m_Name: Armoire
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &874198490953415642
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983013642589161813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.8061192, y: 6.0822043, z: 1.5713493}
+  m_Center: {x: 0, y: 3.0411022, z: 0}
