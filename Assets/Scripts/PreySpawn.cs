@@ -4,23 +4,13 @@ using UnityEngine;
 
 public class PreySpawn : MonoBehaviour
 {
-    public bool playerIsNear = false;
-
-    //FONCTIONS A RETRAVAILLER
-    private void OnTriggerEnter(Collider other)
+    public bool PlayerIsNear()
     {
-        if (other.gameObject.tag == "proie" || other.gameObject.tag == "hunter")
-        {
-            playerIsNear = true;
-        }
+        int layerPrey = LayerMask.GetMask("Prey");
+        int layerHunter = LayerMask.GetMask("Hunter");
+        int layerMask = layerPrey | layerHunter;
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, layerMask);
+        if (hitColliders.Length > 0) return true;
+        else return false;
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "proie" || other.gameObject.tag == "hunter")
-        {
-            playerIsNear = false;
-        }
-    }
-
 }

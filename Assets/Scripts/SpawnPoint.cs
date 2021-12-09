@@ -6,12 +6,9 @@ using Unity.Netcode;
 public class SpawnPoint : MonoBehaviour
 {
 
-    //Variable pour vérifier qu'il n'y ai pas de joueur proche. Il faudra changer ce système quand il y aura plusieurs joueurs
-    bool playerIsNear;
-
     public bool SpawnPiece()
     {
-        if (playerIsNear) return false;
+        if (PlayerIsNear()) return false;
         Vector3 pos = transform.position + Vector3.up;
         Piece piece = Instantiate(GameManager.Instance.prefabPiece);
         piece.transform.position = pos;
@@ -20,19 +17,14 @@ public class SpawnPoint : MonoBehaviour
         return true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public bool PlayerIsNear()
     {
-        if(other.gameObject.tag == "proie")
-        {
-            playerIsNear = true;
-        }
+        int layerPrey = LayerMask.GetMask("Prey");
+        int layerHunter = LayerMask.GetMask("Hunter");
+        int layerMask = layerPrey | layerHunter;
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, layerMask);
+        if (hitColliders.Length > 0) return true;
+        else return false;
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "proie")
-        {
-            playerIsNear = false;
-        }
-    }
 }

@@ -54,7 +54,7 @@ public class Player : NetworkBehaviour
         while (!foundGoodSpawn && nbIter < preySpawns.Length)
         {
             randomIndex = UnityEngine.Random.Range(0, preySpawns.Length);
-            if (!preySpawns[randomIndex].playerIsNear)
+            if (!preySpawns[randomIndex].PlayerIsNear())
             {
                 var clientTransform = GetComponent<ClientNetworkTransform>();
                 //transform.position = preySpawns[randomIndex].transform.position;

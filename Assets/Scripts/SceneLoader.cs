@@ -93,7 +93,7 @@ public class SceneLoader : NetworkBehaviour
         while (!foundGoodSpawn && nbIter< preySpawns.Length)
         {
             int randomIndex = UnityEngine.Random.Range(0, preySpawns.Length);
-            if (!preySpawns[randomIndex].playerIsNear)
+            if (!preySpawns[randomIndex].PlayerIsNear())
             {
                 player.transform.position = preySpawns[randomIndex].transform.position;
                 foundGoodSpawn = true;
