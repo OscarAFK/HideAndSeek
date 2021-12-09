@@ -24,14 +24,28 @@ public class Player : NetworkBehaviour
 
     public void RemoveCoin()
     {
-        // TODO
-        Debug.Log("Remove Coin");
+        if (IsServer)
+        {
+            netScore.Value -= 5;
+            if (netScore.Value < 0) netScore.Value = 0;
+        }
     }
 
     public void MoveToNewLocation()
     {
-        // TODO
-        Debug.Log("Move to new location");
+        var preySpawns = FindObjectsOfType<PreySpawn>();
+        bool foundGoodSpawn = false;
+        int nbIter = 0;
+        while (!foundGoodSpawn && nbIter < preySpawns.Length)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, preySpawns.Length);
+            if (!preySpawns[randomIndex].playerIsNear)
+            {
+                transform.position = preySpawns[randomIndex].transform.position;
+                foundGoodSpawn = true;
+            }
+            nbIter++;
+        }
     }
 
 }
