@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,15 @@ public class PlayerFirstPersonMovement : MonoBehaviour
         //controls.Player.Jump.performed += _ => Jump();
         controls.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
-        
+
+        controls.Player.LeftClick.performed += _ => Shoot();
+
+
+    }
+
+    private void Shoot()
+    {
+        GetComponent<Laser>().Shoot();
     }
 
     private void OnEnable()

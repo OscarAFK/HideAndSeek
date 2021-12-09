@@ -22,4 +22,16 @@ public class Player : NetworkBehaviour
         //Debug.Log("Score du joueur "+ gameObject.GetComponent<NetworkObject>().OwnerClientId + ": "+ netScore.Value);
     }
 
+    public void RemoveCoin()
+    {
+        // TODO
+        Debug.Log("Remove Coin");
+    }
+
+    public void MoveToNewLocation()
+    {
+        // TODO
+        Debug.Log("Move to new location");
+    }
+
 }
