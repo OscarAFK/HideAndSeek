@@ -68,7 +68,7 @@ public class Laser : NetworkBehaviour
 
     public void Shoot()
     {
-        if (IsOwner)
+        if (IsOwner && !netLaunchLaser.Value)
         {
             DrawLaserServerRpc(true);
             LaserValuesServerRpc(camera.transform.position, camera.forward);
