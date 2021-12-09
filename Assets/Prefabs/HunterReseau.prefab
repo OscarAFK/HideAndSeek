@@ -133,6 +133,8 @@ MonoBehaviour:
     m_InternalValue: 0
   netScore:
     m_InternalValue: 0
+  netShouldChangeLocation:
+    m_InternalValue: 0
 --- !u!114 &887537258523450796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +260,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 3233211342306454093}
+  netLaunchLaser:
+    m_InternalValue: 0
+  netOriginLaser:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  netLaserForward:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  laserMask:
+    serializedVersion: 2
+    m_Bits: 16439
 --- !u!1 &1799552214408581532
 GameObject:
   m_ObjectHideFlags: 0

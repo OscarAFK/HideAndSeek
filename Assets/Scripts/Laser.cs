@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Samples;
 using UnityEngine;
 
 public class Laser : NetworkBehaviour
@@ -13,6 +14,10 @@ public class Laser : NetworkBehaviour
     public NetworkVariable<Vector3> netOriginLaser = new NetworkVariable<Vector3>();
     public NetworkVariable<Vector3> netLaserForward = new NetworkVariable<Vector3>();
     bool laserHasBeenDrawn = false;
+
+    public LayerMask laserMask = 0;
+
+    public GameObject hitGameObject;
 
     // Start is called before the first frame update
     void Start()
@@ -34,18 +39,21 @@ public class Laser : NetworkBehaviour
             //lr.SetPosition(0, transform.position);
             lr.SetPosition(0, netOriginLaser.Value);
             RaycastHit hit;
-            if (Physics.Raycast(netOriginLaser.Value, netLaserForward.Value, out hit))
+            if (Physics.Raycast(netOriginLaser.Value, netLaserForward.Value, out hit, laserMask))
             {
                 if (hit.collider)
                 {
                     lr.SetPosition(1, hit.point);
-
                     if (IsServer)
                     {
-                        if (hit.transform.gameObject.GetComponent<Player>())
+                        hitGameObject = hit.collider.gameObject;
+                        var player = hit.transform.gameObject.GetComponent<Player>();
+                        if (player)
                         {
-                            hit.transform.gameObject.GetComponent<Player>().RemoveCoin();
-                            hit.transform.gameObject.GetComponent<Player>().MoveToNewLocation();
+                            player.GetComponent<NetworkObject>().RemoveOwnership();
+                            player.RemoveCoin();
+                            player.MoveToNewLocation();
+                            player.GetComponent<NetworkObject>().ChangeOwnership((ulong)player.netId.Value);
                         }
                     }
                 }

@@ -30,14 +30,6 @@ public class SceneLoader : NetworkBehaviour
 
         uNetTransport.ConnectAddress = ConnexionInfo.ipAdress;
         uNetTransport.ConnectPort = ConnexionInfo.port;
-        if (ConnexionInfo.ipAdress==null)
-        {
-            Debug.Log("Invalid address, default address and port used");
-            uNetTransport.ConnectAddress = "127.0.0.1";
-            uNetTransport.ConnectPort = 7777;
-            NetworkManager.Singleton.StartHost();
-            return;
-        }
 
         if (ConnexionInfo.isHosting)
         {
@@ -74,7 +66,7 @@ public class SceneLoader : NetworkBehaviour
 
     private void Update()
     {
-        Debug.Log(playersInGame.Value);
+        //Debug.Log(playersInGame.Value);
     }
 
     private void Singleton_OnClientConnectedCallback(ulong obj)
