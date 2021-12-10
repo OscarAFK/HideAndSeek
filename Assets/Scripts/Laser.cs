@@ -7,7 +7,7 @@ using UnityEngine;
 public class Laser : NetworkBehaviour
 {
 
-    private LineRenderer lr;
+    [SerializeField] private LineRenderer lr;
     [SerializeField] private Transform camera;
 
     public NetworkVariable<bool> netLaunchLaser = new NetworkVariable<bool>();
@@ -17,12 +17,21 @@ public class Laser : NetworkBehaviour
 
     public LayerMask laserMask = 0;
 
-    public GameObject hitGameObject;
+    [SerializeField] private GameObject prefabCrackDecal;
+    private GameObject decal;
+
+    [SerializeField] GameObject prefabLaserImpact;
+    [SerializeField] GameObject LaserImpact;
+    [SerializeField] GameObject LaserLight;
+    [SerializeField] ParticleSystem LaserGlow;
+    [SerializeField] ParticleSystem prefabLaserGlowOnVision;
+    [SerializeField] ParticleSystem LaserGlowOnVision;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        lr = GetComponent<LineRenderer>();
         if (IsOwner) DrawLaserServerRpc(false);
         DisableLaser();
     }
@@ -34,19 +43,35 @@ public class Laser : NetworkBehaviour
         {
             laserHasBeenDrawn = true;
             lr.enabled = true;
-            Debug.Log("Shoooot ! ");
-
+            
             //lr.SetPosition(0, transform.position);
-            lr.SetPosition(0, netOriginLaser.Value);
+            lr.SetPosition(0, netOriginLaser.Value + camera.forward * 0.3f);
             RaycastHit hit;
             if (Physics.Raycast(netOriginLaser.Value, netLaserForward.Value, out hit, laserMask))
             {
                 if (hit.collider)
                 {
                     lr.SetPosition(1, hit.point);
-                    if (IsServer)
+                    if (!LaserImpact)
                     {
-                        hitGameObject = hit.collider.gameObject;
+                        LaserImpact = Instantiate(prefabLaserImpact);
+                        LaserLight = LaserImpact.transform.Find("LaserLight").gameObject;
+                        LaserGlow = LaserImpact.transform.Find("Glow").GetComponent<ParticleSystem>();
+                        LaserGlowOnVision = Instantiate(prefabLaserGlowOnVision);
+                    }
+                    LaserImpact.transform.position = hit.point + hit.normal * 0.1f;
+                    LaserGlowOnVision.transform.position = netOriginLaser.Value + camera.forward * 0.3f;
+                    LaserLight.SetActive(true);
+                    LaserGlow.Play();
+                    LaserGlowOnVision.Play();
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("GroundAndWall"))
+                    {
+                        SpawnDecal(hit);
+                    }
+
+                    if (IsServer && hit.collider.gameObject.layer == LayerMask.NameToLayer("Prey"))
+                    {
+                        var hitGameObject = hit.collider.gameObject;
                         var player = hit.transform.gameObject.GetComponent<Player>();
                         if (player)
                         {
@@ -90,7 +115,22 @@ public class Laser : NetworkBehaviour
         {
             DrawLaserServerRpc(false);
         }
+        if (LaserLight)
+        {
+            LaserLight.SetActive(false);
+            LaserGlow.Stop();
+            LaserGlowOnVision.Stop();
+        }
         lr.enabled = false;
+    }
+
+    void SpawnDecal(RaycastHit hitInfo)
+    {
+        if(decal == null) decal = Instantiate(prefabCrackDecal);
+        decal.transform.position = hitInfo.point;
+        decal.transform.position += hitInfo.normal * 0.001f;
+        decal.transform.forward = hitInfo.normal * - 1f;
+        //decal.transform.Rotate(decal.transform.forward, UnityEngine.Random.Range(0,360));
     }
 
     [ServerRpc]

@@ -8,6 +8,8 @@ public class Piece : MonoBehaviour
     [HideInInspector]
     public SpawnPoint spawnPoint;
 
+    public ParticleSystem particle;
+
     private bool toReplace = false;
 
     public int score = 1;
@@ -22,6 +24,7 @@ public class Piece : MonoBehaviour
 
     void GetPiece()
     {
+        particle.Emit(20);
         GameManager.Instance.EmptySpawnPoint(spawnPoint);
         Vector3 newPos = GameManager.Instance.GetEmptySpawnPoint();
         if (newPos.y < -10)
