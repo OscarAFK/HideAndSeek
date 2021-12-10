@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3682090966006291737}
   - component: {fileID: 6729939196600906505}
   - component: {fileID: 7202750230535521520}
-  - component: {fileID: 1795142145110925578}
+  - component: {fileID: 313583524483033909}
   m_Layer: 0
   m_Name: Coffre
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1795142145110925578
+--- !u!65 &313583524483033909
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,5 +94,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.284297, y: 2.1555412, z: 2.1555407}
-  m_Center: {x: 5.642149, y: 0.00000023841858, z: 0}
+  m_Size: {x: 1.7107309, y: 2.1555412, z: 2.1555407}
+  m_Center: {x: 0.85536546, y: 0.00000023841864, z: 0}

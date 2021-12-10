@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6010519373534915604}
   - component: {fileID: 462171809563510723}
   - component: {fileID: 4286858926440626459}
-  - component: {fileID: 8236388887654710947}
+  - component: {fileID: 1838839245885916639}
   m_Layer: 0
   m_Name: Tonneau
   m_TagString: Untagged
@@ -83,8 +83,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8236388887654710947
-CapsuleCollider:
+--- !u!65 &1838839245885916639
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -93,7 +93,6 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.77
-  m_Height: 9
-  m_Direction: 1
-  m_Center: {x: 0, y: 3.93, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 3.479273, y: 3.4560292, z: 3.479273}
+  m_Center: {x: 0, y: 1.7445518, z: 0}

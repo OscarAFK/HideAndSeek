@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7788740837194325218}
   - component: {fileID: 8115826660144194542}
   - component: {fileID: 6295140502947307330}
-  - component: {fileID: 1766418418260742435}
+  - component: {fileID: 4746245019693831294}
   m_Layer: 0
   m_Name: Tabouret
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1766418418260742435
+--- !u!65 &4746245019693831294
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,5 +94,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.013402, y: 10.826752, z: 3.013402}
-  m_Center: {x: 0, y: 5.4265814, z: 0}
+  m_Size: {x: 3.013402, y: 2.3485217, z: 3.013402}
+  m_Center: {x: 0, y: 1.1874669, z: 0}

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     List<SpawnPoint> spawnPoints;
     List<SpawnPoint> emptySpawnPoints;
 
+    public GameObject menuPause;
+
     public static GameManager Instance
     {
         get
@@ -57,9 +59,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (NetworkManager.Singleton.IsServer)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            
+            menuPause.SetActive(!menuPause.activeSelf);
+            var netObj = FindObjectsOfType<Player>();
+            foreach (var obj in netObj)
+            {
+                if (!obj.IsOwner) continue;
+                if (obj.GetComponent<ThirdPersonMovement>())
+                {
+                    if (menuPause.activeSelf) obj.GetComponent<ThirdPersonMovement>().controls.Disable();
+                    else obj.GetComponent<ThirdPersonMovement>().controls.Enable();
+                }else if (obj.GetComponent<PlayerFirstPersonMovement>())
+                {
+                    if (menuPause.activeSelf) obj.GetComponent<PlayerFirstPersonMovement>().controls.Disable();
+                    else obj.GetComponent<PlayerFirstPersonMovement>().controls.Enable();
+                }
+            }
         }
     }
 

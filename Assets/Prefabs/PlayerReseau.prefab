@@ -896,7 +896,6 @@ GameObject:
   - component: {fileID: 1851982179462831621}
   - component: {fileID: 6826088525455763098}
   - component: {fileID: 27221273003106277}
-  - component: {fileID: 290839666634571471}
   m_Layer: 14
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1003,20 +1002,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &290839666634571471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4295423108503618924}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1794e3a107014948bb65c7a4b4b30d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraHolder: {fileID: 0}
-  removeFromParent: 1
 --- !u!1 &4662427443969211179
 GameObject:
   m_ObjectHideFlags: 3
@@ -1191,6 +1176,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1992936194940487193, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}
       propertyPath: m_SlopeLimit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992936194940487193, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}
+      propertyPath: m_StepOffset
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1992936194940487194, guid: 7dc9afd8915d41142986e24c7020a257, type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2097534202344378436}
   - component: {fileID: 4527859557362558144}
   - component: {fileID: 9135262682120490633}
-  - component: {fileID: 2420177307968896926}
+  - component: {fileID: 3387611843975891938}
   m_Layer: 0
   m_Name: Canape
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2420177307968896926
+--- !u!65 &3387611843975891938
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,5 +94,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.978301, y: 20.59716, z: 3.3383152}
-  m_Center: {x: 0, y: 10.29858, z: -1.0055505}
+  m_Size: {x: 7.978301, y: 2.8372774, z: 3.3383152}
+  m_Center: {x: 0, y: 1.4186387, z: -1.0055505}
