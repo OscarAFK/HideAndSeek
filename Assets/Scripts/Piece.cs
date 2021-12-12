@@ -24,7 +24,6 @@ public class Piece : MonoBehaviour
 
     void GetPiece()
     {
-        particle.Emit(20);
         GameManager.Instance.EmptySpawnPoint(spawnPoint);
         Vector3 newPos = GameManager.Instance.GetEmptySpawnPoint();
         if (newPos.y < -10)
@@ -36,12 +35,21 @@ public class Piece : MonoBehaviour
         //Destroy(this.gameObject);
     }
 
+    void PlayTakenAnimation()
+    {
+        particle.Emit(20);
+    }
+
     private void OnTriggerEnter(Collider  other)
     {
-       if (other.gameObject.tag == "proie" && NetworkManager.Singleton.IsServer)
+       if (other.gameObject.tag == "proie")
         {
-            GetPiece();
-            other.GetComponent<Player>().AddScore(score);
+            PlayTakenAnimation();
+            if (NetworkManager.Singleton.IsServer)
+            {
+                GetPiece();
+                other.GetComponent<Player>().AddScore(score);
+            }
         }
     }
 

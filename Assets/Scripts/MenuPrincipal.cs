@@ -11,6 +11,7 @@ public class MenuPrincipal : MonoBehaviour
     public Canvas jouerQuitter;
     public Canvas hebergerRejoindre;
     public TextMeshProUGUI addrEtPort;
+    public TextMeshProUGUI pseudoField;
     public Image adressInputField;
 
     private void Start()
@@ -38,6 +39,7 @@ public class MenuPrincipal : MonoBehaviour
 
     bool RecupereConnexionInfo()
     {
+        ConnexionInfo.pseudo = pseudoField.text;
         string[] s = addrEtPort.text.Split(':');
         if (s.Length != 2) return false;
         ConnexionInfo.ipAdress = s[0];

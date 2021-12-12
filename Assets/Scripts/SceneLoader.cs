@@ -41,7 +41,6 @@ public class SceneLoader : NetworkBehaviour
         else
         {
             NetworkManager.Singleton.StartClient();
-            
         }
     }
 
@@ -81,6 +80,7 @@ public class SceneLoader : NetworkBehaviour
 
             playersInGame.Value++;
             p.netId.Value = (int)obj;
+            p.gameObject.GetComponent<NetworkObject>().SpawnAsPlayerObject(obj);
         }
     }
 
@@ -100,8 +100,6 @@ public class SceneLoader : NetworkBehaviour
             }
             nbIter++;
         }
-        
-        player.gameObject.GetComponent<NetworkObject>().SpawnAsPlayerObject(id);
         return player.GetComponent<Player>();
     }
 
@@ -109,7 +107,6 @@ public class SceneLoader : NetworkBehaviour
     {
         GameObject player = Instantiate(hunterPrefab);
         player.transform.position = hunterSpawn.transform.position;
-        player.gameObject.GetComponent<NetworkObject>().SpawnAsPlayerObject(id);
         return player.GetComponent<Player>();
     }
 }

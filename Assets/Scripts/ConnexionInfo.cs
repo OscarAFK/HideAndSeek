@@ -7,5 +7,6 @@ public static class ConnexionInfo
     static public string ipAdress;
     static public int port;
     static public bool isHosting;
+    static public string pseudo;
 
 }
