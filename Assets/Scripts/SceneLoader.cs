@@ -36,11 +36,11 @@ public class SceneLoader : NetworkBehaviour
             NetworkManager.Singleton.StartHost();
             playersInGame.Value = 1;
             GameManager.Instance.Initialize();
-
         }
         else
         {
             NetworkManager.Singleton.StartClient();
+            GameManager.Instance.Initialize();
         }
     }
 
@@ -54,8 +54,8 @@ public class SceneLoader : NetworkBehaviour
             {
                 if(p.netId.Value == (int)obj)
                 {
-                    //p.GetComponent<NetworkObject>().RemoveOwnership();
-                    //p.GetComponent<NetworkObject>().Despawn();
+                    p.netPseudo.OnValueChanged = null;
+                    p.netScore.OnValueChanged = null;
                     break;
                 }
             }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7312011129038257189}
   - component: {fileID: 7312011129038257188}
   - component: {fileID: 7312011129038257184}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoint
   m_TagString: spawnPiece
   m_Icon: {fileID: 0}

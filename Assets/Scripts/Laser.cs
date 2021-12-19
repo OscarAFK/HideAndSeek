@@ -27,7 +27,7 @@ public class Laser : NetworkBehaviour
     [SerializeField] ParticleSystem prefabLaserGlowOnVision;
     [SerializeField] ParticleSystem LaserGlowOnVision;
 
-
+    public GameObject hitted;
 
     // Start is called before the first frame update
     void Start()
@@ -47,10 +47,11 @@ public class Laser : NetworkBehaviour
             //lr.SetPosition(0, transform.position);
             lr.SetPosition(0, netOriginLaser.Value + camera.forward * 0.3f);
             RaycastHit hit;
-            if (Physics.Raycast(netOriginLaser.Value, netLaserForward.Value, out hit, laserMask))
+            if (Physics.Raycast(netOriginLaser.Value, netLaserForward.Value, out hit, 100, laserMask))
             {
                 if (hit.collider)
                 {
+                    hitted = hit.collider.gameObject;
                     lr.SetPosition(1, hit.point);
                     if (!LaserImpact)
                     {
@@ -71,6 +72,7 @@ public class Laser : NetworkBehaviour
 
                     if (IsServer && hit.collider.gameObject.layer == LayerMask.NameToLayer("Prey"))
                     {
+                        GetComponent<Player>().AddScore(1);
                         var hitGameObject = hit.collider.gameObject;
                         var player = hit.transform.gameObject.GetComponent<Player>();
                         if (player)

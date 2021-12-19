@@ -9,7 +9,7 @@ public class PreySpawn : MonoBehaviour
         int layerPrey = LayerMask.GetMask("Prey");
         int layerHunter = LayerMask.GetMask("Hunter");
         int layerMask = layerPrey | layerHunter;
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, layerMask);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10, layerMask);
         if (hitColliders.Length > 0) return true;
         else return false;
     }
