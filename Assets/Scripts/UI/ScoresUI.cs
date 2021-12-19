@@ -7,14 +7,14 @@ public class ScoresUI : MonoBehaviour
     Dictionary<Player, PlayerScoreUI> scoresPlayers;
     public GameObject prefabPlayerScore;
 
-    private void Update()
+    /*private void Update()
     {
         foreach(var p in scoresPlayers)
         {
             UpdateScorePlayer(p.Key);
-            UpdatePseudoPlayer(p.Key);
         }
-    }
+    }*/
+
     public void AddPlayerUI(Player player)
     {
         if(scoresPlayers==null) scoresPlayers = new Dictionary<Player, PlayerScoreUI>();
@@ -37,9 +37,10 @@ public class ScoresUI : MonoBehaviour
         Destroy(go);
     }
 
-    public void UpdateScorePlayer(Player player)
+    public void UpdateScorePlayer(Player player, bool winScore)
     {
         scoresPlayers[player].SetScoreJoueur(player.netScore.Value);
+        scoresPlayers[player].PlayScoreAnimation(winScore);
     }
 
     public void UpdateRoleUI(Player player)

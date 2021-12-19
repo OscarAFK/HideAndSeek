@@ -1,4 +1,5 @@
 
+using System;
 using Unity.Collections;
 using Unity.Netcode;
 using Unity.Netcode.Samples;
@@ -18,15 +19,29 @@ public class Player : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        scoresUI = FindObjectOfType<ScoresUI>();
+        //netPseudo.OnValueChanged += scoresUI.UpdatePseudoPlayer(this);
+        netPseudo.OnValueChanged += pseudoChanged;
+        netScore.OnValueChanged += scoreChanged;
+        scoresUI.AddPlayerUI(this);
+        scoresUI.UpdateRoleUI(this);
         if (IsServer) netScore.Value = 0;
         if (IsOwner)
         {
             SetPseudoServerRPC(ConnexionInfo.pseudo);
         }
-        scoresUI = FindObjectOfType<ScoresUI>();
-        scoresUI.AddPlayerUI(this);
-        scoresUI.UpdateRoleUI(this);
         LayoutRebuilder.ForceRebuildLayoutImmediate(scoresUI.GetComponent<RectTransform>());
+    }
+
+    private void scoreChanged(int oldVal, int newVal)
+    {
+        bool winScore = oldVal <= newVal ? true : false;
+        scoresUI.UpdateScorePlayer(this, winScore);
+    }
+
+    private void pseudoChanged(NetworkString oldVal, NetworkString newVal)
+    {
+        scoresUI.UpdatePseudoPlayer(this);
     }
 
     public override void OnDestroy()
@@ -100,7 +115,6 @@ public class Player : NetworkBehaviour
     {
         netPseudo.Value = pseudo;
     }
-
 }
 
 public struct NetworkString : INetworkSerializable

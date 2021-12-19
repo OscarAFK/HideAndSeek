@@ -6,9 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class MenuPause : MonoBehaviour
 {
-    public void ReprendrePartie()
+    public bool isActive = false;
+    public GameObject interfaceJoueur;
+
+    public void SwitchMenu()
     {
-        gameObject.SetActive(false);
+        isActive = !isActive;
+        Cursor.visible = isActive;
+        if(isActive) Cursor.lockState = CursorLockMode.None;
+        else Cursor.lockState = CursorLockMode.Locked;
+        gameObject.SetActive(isActive);
+        interfaceJoueur.SetActive(!isActive);
+        var netObj = FindObjectsOfType<Player>();
+        foreach (var obj in netObj)
+        {
+            if (!obj.IsOwner) continue;
+            if (obj.GetComponent<ThirdPersonMovement>())
+            {
+                if (isActive) obj.GetComponent<ThirdPersonMovement>().controls.Disable();
+                else obj.GetComponent<ThirdPersonMovement>().controls.Enable();
+            }
+            else if (obj.GetComponent<PlayerFirstPersonMovement>())
+            {
+                if (isActive) obj.GetComponent<PlayerFirstPersonMovement>().controls.Disable();
+                else obj.GetComponent<PlayerFirstPersonMovement>().controls.Enable();
+            }
+        }
     }
 
     public void MenuPrincipal()

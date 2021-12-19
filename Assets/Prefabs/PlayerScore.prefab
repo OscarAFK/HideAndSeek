@@ -504,6 +504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pseudoDuJoueur: {fileID: 714953286132540554}
   scoreDuJoueur: {fileID: 862169861074818198}
+  scoreAnimator: {fileID: 4402230700817402435}
   imagePrey: {fileID: 6206352432329459853}
   imageHunter: {fileID: 7535881951024264}
 --- !u!1 &9155917721208527296
@@ -518,6 +519,7 @@ GameObject:
   - component: {fileID: 3190147936317913716}
   - component: {fileID: 862169861074818198}
   - component: {fileID: 5424462569211894517}
+  - component: {fileID: 4402230700817402435}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -543,7 +545,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3190147936317913716
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -661,3 +663,22 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!95 &4402230700817402435
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9155917721208527296}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6ead2779aaa2b8242a4c4c2f08ee2be9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

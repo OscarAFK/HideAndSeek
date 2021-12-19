@@ -172,7 +172,7 @@ MonoBehaviour:
     m_InternalValue: {x: 0, y: 0, z: 0}
   laserMask:
     serializedVersion: 2
-    m_Bits: 20535
+    m_Bits: 20481
   prefabCrackDecal: {fileID: 8372860065901270507, guid: 1f733d45796c24641b484c356103d583, type: 3}
   prefabLaserImpact: {fileID: 8368356620873173949, guid: 0be32b66cc69071498f8ca39f44cb6a5, type: 3}
   LaserImpact: {fileID: 0}
@@ -180,6 +180,7 @@ MonoBehaviour:
   LaserGlow: {fileID: 0}
   prefabLaserGlowOnVision: {fileID: 6912503922629289273, guid: 61256e2f991850146a344e2d65aea343, type: 3}
   LaserGlowOnVision: {fileID: 0}
+  hitted: {fileID: 0}
 --- !u!1 &1799552214408581532
 GameObject:
   m_ObjectHideFlags: 0
