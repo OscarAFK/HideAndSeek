@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPiece: {fileID: 5839207302238166281, guid: 67c44e8df4ebded4a9c284183cc9a049, type: 3}
-  nbPieceTotal: 3
+  nbPieceTotal: 15
+  menuPause: {fileID: 0}
+  menuVictoire: {fileID: 0}
